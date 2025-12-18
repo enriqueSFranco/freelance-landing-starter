@@ -1,27 +1,34 @@
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #666666;
+  --border: #eaeaea;
+  --accent: #000000;
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: system-ui, sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.7;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
 }
 
 .container {
   max-width: var(--container);
+  padding: 0 1.5rem;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
-a {
-  color: var(--color-accent);
-  transition: 0.2s;
-}
-
-a:hover {
-  color: var(--color-accent-hover);
+button {
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--fg);
+  color: white;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
 }
