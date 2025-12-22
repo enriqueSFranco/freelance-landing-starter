@@ -1,0 +1,186 @@
+---
+import LinkButton from "@components/ui/LinkButton.astro";
+import { site } from "@data/site";
+
+const menu = [
+  { label: "Cortes & Barba", href: "#servicios" }, 
+  { label: "Maestros del Filo", href: "#barberos" },
+  { label: "Galería de Estilos", href: "#galeria" },
+  { label: "Dónde Estamos", href: "#ubicacion" },
+];
+---
+
+<style is:inline>
+  .hamburger-inner {
+    width: 24px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+  }
+
+  .hamburger-line {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    background-color: #374151;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                top 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+                opacity 0.2s ease;
+  }
+
+  .hamburger-line.top { top: 0;}
+  .hamburger-line.middle { top: 8px;}
+  .hamburger-line.bottom {top: 16px;}
+
+  /* animacion a X cuando se tiene la clase .is-active */
+  #menu-toggle.is-active .top {
+    top: 8px;
+    transform: rotate(45deg);
+    animation: floatingX 4s infinite ease-in-out 0.5s;
+  }
+
+  #menu-toggle.is-active .middle {
+    opacity: 0;
+    left: -20px;
+  }
+
+  #menu-toggle.is-active .bottom {
+    top: 8px;
+    transform: rotate(-45deg);
+    animation: floatingXInverse 4s infinite ease-in-out 0.5s;
+  }
+
+  #mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @keyframes floatingX {
+    0%, 100% { transform: rotate(45deg); }
+    50% { transform: rotate(50deg); }
+  }
+
+  @keyframes floatingXInverse {
+    0%, 100% { transform: rotate(-45deg); }
+    50% { transform: rotate(-40deg); }
+  }
+</style>
+
+<header
+  class="flex items-center gap-6 text-sm text-gray-600 h-16 sticky top-0 z-50 backdrop-blur mix-blend-plus-darker"
+  style="background-color: color-mix(in srgb, var(--bg-main) 75%, transparent); border-color: var(--border-color);"
+>
+  <div class="container flex items-center justify-between header-inner relative">
+    <a
+      href="/"
+      class="logo flex items-center text-sm font-semibold tracking-tight"
+    >
+      💈
+      {site.business.name}
+    </a>
+    <nav
+      id="desktop-menu"
+      class="hidden md:flex items-center justify-center space-x-10 w-full max-w-2xl"
+    >
+      {
+        menu.map((item) => (
+          <a href={item.href} class="link-underline">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="hidden md:flex md:items-center md:justify-center">
+      <LinkButton href="/" variant="ghost">
+        <svg class="icon" width="24" height="24">
+          <use xlink:href="/sprite.svg#TikTok_dark"></use>
+        </svg>
+      </LinkButton>
+      <!-- <LinkButton href="/" variant="ghost">
+        <svg class="icon" width="24" height="24">
+          <use xlink:href="#TikTok_light"></use>
+        </svg>
+      </LinkButton> -->
+
+      <LinkButton href="/" variant="ghost">
+        <svg class="icon" width="24" height="24">
+          <use xlink:href="/sprite.svg#instagram-icon"></use>
+        </svg>
+      </LinkButton>
+
+      <LinkButton href={site.contact.whatsapp} variant="ghost" size="sm">
+        <svg class="icon" width="24" height="24">
+          <use xlink:href="/sprite.svg#whatsapp-icon"></use>
+        </svg>
+      </LinkButton>
+    </div>
+  </div>
+
+  <!-- menu mobile -->
+  <button id="menu-toggle" class="md:hidden relative size-10 flex flex-col items-center justify-center z-50" aria-label="Toggle Menu">
+    <div id="icon-wrapper" class="hamburger-inner">
+      <span class="hamburger-line top"></span>
+      <span class="hamburger-line middle"></span>
+      <span class="hamburger-line bottom"></span>
+    </div>
+  </button>
+  <div
+    id="mobile-menu"
+    class="fixed top-22 w-full bg-black/90 text-white z-105 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) opacity-0 pointer-events-none translate-y-[-10%]"
+    style="border-color: var(--border-color)"
+  >
+    <nav class="px-6 py-6 flex flex-col gap-4 text-sm">
+      {
+        menu.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-link hover:text-black"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="flex gap-6 mt-4">
+        <a href="#"
+          ><svg width="28" height="28"
+            ><use xlink:href="/sprite.svg#instagram-icon"></use></svg
+          ></a
+        >
+        <a href="#"
+          ><svg width="28" height="28"
+            ><use xlink:href="/sprite.svg#whatsapp-icon"></use></svg
+          ></a
+        >
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const $btnToggle = document.getElementById("menu-toggle");
+  const $mobileMenu = document.getElementById("mobile-menu");
+  const $mobileLinks = document.querySelectorAll(".mobile-link");
+
+  function toggleMenu() {
+    $btnToggle?.classList.toggle("is-active")
+    $mobileMenu?.classList.toggle("is-open")
+
+    // Evitar que el fondo se mueva cuando el menú está abierto
+    if ($mobileMenu?.classList.contains("is-open")) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+  }
+  $btnToggle?.addEventListener("click", toggleMenu)
+
+  // Cerrar menú al hacer click en un enlace
+  $mobileLinks.forEach(mobileLink => mobileLink.addEventListener("click", toggleMenu))
+</script>
