@@ -1,0 +1,15 @@
+---
+import LinkButton from "@components/ui/LinkButton.astro";
+import { site } from "@data/site";
+---
+
+<section id="cta" class="py-24 md:py-28 text-center px-6" style="background: radial-gradient(circle, var(--bg-main) 0%, var(--bg-muted) 50%);">
+    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">¿Listo para tu próximo corte?</h2>
+    <p>Agenda tu cita en minutos por WhatsApp.</p>
+
+    <div>
+        <LinkButton href={site.cta.link}>
+            Agendar por WhatsApp
+        </LinkButton>
+    </div>
+</section>
