@@ -1,0 +1,70 @@
+---
+import { site } from "@data/site";
+---
+
+<section id="sobre-nosotros" class="py-24 px-6 relative overflow-hidden">
+  <div class="absolute -left-24 top-1/4 w-96 h-96 bg-(--color-bg-surface) opacity-10 blur-[120px] rounded-full"></div>
+
+  <div class="container mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+    
+    <div class="relative group">
+      <div class="absolute -inset-4 border border-(--color-accent) opacity-20 translate-x-2 translate-y-2 rounded-sm group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500"></div>
+      
+      <div class="relative overflow-hidden aspect-4/5 rounded-sm bg-(--color-bg-surface)">
+        <img 
+          src="/images/about-barber.jpg" 
+          alt="Proceso de corte artesanal" 
+          class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 hover:scale-100"
+        />
+      </div>
+
+      <div class="absolute -bottom-6 -right-6 bg-(--color-bg-surface) p-6 rounded-sm shadow-2xl border-l-4 border-(--color-accent)">
+        <span class="block text-3xl font-sancreek text-(--color-accent)">+15</span>
+        <span class="text-[10px] uppercase tracking-widest text-(--color-text-primary)">Años de Maestría</span>
+      </div>
+    </div>
+
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <span class="text-(--color-accent) uppercase tracking-[0.3em] text-sm font-bold block">
+          Nuestra Esencia
+        </span>
+        <h2 class="text-4xl md:text-5xl font-sancreek text-(--color-text-primary) leading-tight">
+          Donde la Tradición <br/> se une al Estilo
+        </h2>
+      </div>
+
+      <div class="space-y-6 text-(--color-text-muted) leading-relaxed text-lg">
+        <p>
+          En <span class="text-(--color-text-primary) font-semibold italic">Maestros del Filo</span>, no solo cortamos el cabello; esculpimos identidades. Fundada sobre los pilares de la barbería clásica, nuestra pasión es devolver al hombre ese ritual de cuidado personal que se ha perdido en el tiempo.
+        </p>
+        <p>
+          Cada cliente que se sienta en nuestro sillón recibe una experiencia personalizada, utilizando técnicas de navaja abierta, toallas calientes y los mejores productos de nuestra propia selección.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 pt-4">
+        <div class="flex items-start gap-3">
+          <div class="size-2 mt-2 bg-(--color-accent) rotate-45"></div>
+          <div>
+            <h4 class="text-(--color-text-primary) font-bold text-sm uppercase">Corte Clásico</h4>
+            <p class="text-xs text-(--color-text-muted)">Precisión milimétrica</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="size-2 mt-2 bg-(--color-accent) rotate-45"></div>
+          <div>
+            <h4 class="text-(--color-text-primary) font-bold text-sm uppercase">Afeitado Ritual</h4>
+            <p class="text-xs text-(--color-text-muted)">Con toalla caliente</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #sobre-nosotros {
+    background-color: var(--color-bg-primary);
+  }
+</style>
