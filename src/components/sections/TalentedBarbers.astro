@@ -1,0 +1,152 @@
+---
+import { getAllBarbers } from "@lib/barbers";
+
+const barbers = await getAllBarbers();
+---
+
+<style is:inline>
+  .scroller {
+    width: 100%;
+  }
+
+  .scroller[data-animated="true"] {
+    overflow: hidden;
+  }
+
+  .scroller[data-animated="true"] .scroller_inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll 30s linear infinite;
+  }
+
+  .scroller_inner {
+    padding-block: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+
+</style>
+
+<script>
+  const scrollers = document.querySelectorAll(".scroller")
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    addAnimation()
+  }
+
+  function addAnimation() {
+    scrollers.forEach(scroller => {
+      scroller.setAttribute("data-animated", "true")
+
+      const scrollerInner = document.querySelector(".scroller_inner")
+      if (!scrollerInner) return
+      const scrollContent = Array.from(scrollerInner.children)
+
+      scrollContent.forEach(item => {
+        const duplicatedItem = item.cloneNode(true)
+        duplicatedItem.setAttribute("aria-hidden", true)
+        scrollerInner.appendChild(duplicatedItem)
+      })
+
+    })
+  }
+</script>
+
+<section
+  id="maestros-del-filo"
+  class="py-24 bg-(--color-bg-primary) relative overflow-hidden"
+>
+  <div
+    aria-hidden="true"
+    class="scroller absolute -bottom-10 left-0 w-full opacity-[0.03] select-none pointer-events-none"
+  >
+    <ul class="words-list scroller_inner">
+      <li>
+        <span
+          class="text-[200px] font-sancreek text-white leading-none whitespace-nowrap"
+        >
+          TRADICION •
+        </span>
+      </li>
+      <li>
+        <span
+          class="text-[200px] font-sancreek text-white leading-none whitespace-nowrap"
+        >
+          HONOR •
+        </span>
+      </li>
+      <li>
+        <span
+          class="text-[200px] font-sancreek text-white leading-none whitespace-nowrap"
+        >
+          ESTILO •
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-20">
+      <span
+        class="text-(--color-accent) uppercase tracking-[0.4em] text-xs font-bold"
+        >El Equipo</span
+      >
+      <h2
+        class="text-5xl md:text-7xl font-sancreek text-(--color-text-primary) mt-4"
+      >
+        Maestros del Filo
+      </h2>
+      <div class="w-24 h-1 bg-(--color-accent) mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-12 lg:gap-16">
+      {
+        barbers.map((barber) => (
+          <div class="group">
+            <div class="relative">
+              <div class="absolute -inset-2 border border-(--color-bg-surface) group-hover:border-(--color-accent) transition-colors duration-500" />
+
+              <div class="relative aspect-3/4 overflow-hidden bg-(--color-bg-surface)">
+                <img
+                  src={barber.data.photo}
+                  alt={barber.data.firstName}
+                  class="w-full h-full object-cover sepia-[0.3] group-hover:sepia-0 group-hover:scale-105 transition-all duration-700"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-(--color-bg-primary) via-transparent to-transparent opacity-90" />
+
+                <div class="absolute inset-0 flex flex-col justify-end p-8 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <p class="text-(--color-text-primary) text-sm italic mb-4">
+                    "{barber.data.bio}"
+                  </p>
+                  <div class="flex gap-4">
+                    <div class="w-8 h-px bg-(--color-accent) self-center" />
+                    <span class="text-[10px] uppercase tracking-widest text-(--color-accent)">
+                      Ver Portfolio
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left">
+              <h3 class="text-3xl font-sancreek text-(--color-accent) mb-1">
+                {barber.data.firstName}
+              </h3>
+              <p class="text-(--color-text-primary) uppercase tracking-widest text-[11px] font-bold mb-2">
+                {barber.data.specialty}
+              </p>
+              <span class="text-(--color-text-muted) text-xs">
+                Exp: {barber.data.seniority}
+              </span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
