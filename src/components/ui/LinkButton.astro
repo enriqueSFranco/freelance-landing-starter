@@ -3,24 +3,49 @@ import type { HTMLAttributes } from "astro/types";
 
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
+type Rounded = "sm" | "md" | "lg";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
   variant?: Variant;
   size?: Size;
+  rounded?: Rounded;
 }
 
-const { href, variant = "primary", size = "sm" } = Astro.props;
+const {
+  href,
+  variant = "primary",
+  size = "sm",
+  rounded = "sm",
+} = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center rounded-full font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center font-medium transition-all duration-300 ease-[cubic-bezier(.4,0,.2,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-(--brand-accent) text-white hover:opacity-90 focus-visible:ring-(--brand-accent)",
-  secondary:
-    "border border-gray-300 text-gray-900 hover:bg-gray-100 focus-visible:ring-gray-400",
-  ghost: "text-gray-900 hover:bg-gray-100 focus-visible:ring-gray-400",
+  primary: `
+    bg-[var(--color-accent)]
+    text-[var(--color-text-primary)]
+    hover:bg-[var(--color-accent-hover)]
+    hover:-translate-y-[1px]
+    focus-visible:ring-[var(--color-accent)]
+  `,
+
+  secondary: `
+    border border-[color-mix(in_srgb,var(--color-text-primary)_25%,transparent)]
+    text-[var(--color-text-primary)]
+    hover:border-[var(--color-accent)]
+    hover:text-[var(--color-accent)]
+    hover:-translate-y-[1px]
+    focus-visible:ring-[var(--color-accent)]
+  `,
+
+  ghost: `
+    text-[var(--color-text-muted)]
+    hover:text-[var(--color-text-primary)]
+    hover:bg-[color-mix(in_srgb,var(--color-bg-surface)_45%,transparent)]
+    focus-visible:ring-[var(--color-bg-surface)]
+  `,
 };
 
 const sizes: Record<Size, string> = {
@@ -28,8 +53,24 @@ const sizes: Record<Size, string> = {
   md: "px-6 py-3 text-sm",
   lg: "px-8 py-4 text-base",
 };
+
+const borderRadius: Record<Rounded, string> = {
+  sm: "rounded-md",
+  md: "rounded-lg",
+  lg: "rounded-full",
+};
 ---
 
-<a target="_blank" rel="external" href={href} class:list={[base, variants[variant], sizes[size]]}>
+<a
+  href={href}
+  target="_blank"
+  rel="external"
+  class:list={[
+    base,
+    variants[variant],
+    sizes[size],
+    borderRadius[rounded],
+  ]}
+>
   <slot />
 </a>
