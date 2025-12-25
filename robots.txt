@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /_astro/
+Disallow: /scripts/
+
+Sitemap: https://tu-dominio.mx/sitemap-index.xml
