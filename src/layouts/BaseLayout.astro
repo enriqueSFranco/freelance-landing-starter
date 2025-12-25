@@ -3,8 +3,12 @@ import { site } from '@data/site'
 import Footer from '@components/layout/Footer.astro'
 import Header from '@components/layout/Header.astro'
 
+import '@fontsource-variable/montserrat';
+import '@fontsource/sancreek';
+
 import "@styles/global.css"
 import "@styles/animations.css"
+import LoyaltyBanner from '@components/sections/LoyaltyBanner.astro';
 
 interface Props {
     title?: string
@@ -25,11 +29,12 @@ const {title="Astro landing"} = Astro.props
 		<meta name="robots" content="index, follow">
 		<title>{title}</title>
 	</head>
-	<body class="flex flex-col min-h-screen font-sans antialiased">
+	<body class="flex flex-col min-h-screen font-montserrat antialiased">
 		<Header />
 		<main id="main" class="grow">
 			<slot />
 		</main>
+		<LoyaltyBanner />
 		<Footer />
 	</body>
 </html>

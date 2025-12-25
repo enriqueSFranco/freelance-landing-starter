@@ -1,15 +1,75 @@
 ---
-import LinkButton from "@components/ui/LinkButton.astro";
-import { site } from "@data/site";
+const contactInfo = {
+  address: "Av. Morelos 23, Santa Clara Coatitla",
+  city: "Ecatepec de Morelos, Méx.",
+  whatsapp: "+52 55 1234 5678",
+  instagram: "@maestrosdelfilo",
+  schedule: [
+    { days: "Lunes - Viernes", hours: "10:00 – 20:00" },
+    { days: "Sábado", hours: "10:00 – 19:00" },
+    { days: "Domingo", hours: "10:00 – 14:00" },
+  ]
+};
 ---
 
-<section id="cta" class="py-24 md:py-28 text-center px-6" style="background: radial-gradient(circle, var(--bg-main) 0%, var(--bg-muted) 50%);">
-    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">¿Listo para tu próximo corte?</h2>
-    <p>Agenda tu cita en minutos por WhatsApp.</p>
+<section id="ubicacion" class="py-24 bg-(--color-bg-primary) relative">
+  <div class="container mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      
+      <div class="space-y-12">
+        <div>
+          <span class="text-(--color-accent) uppercase tracking-[0.4em] text-xs font-bold">Ubicación</span>
+          <h2 class="text-5xl md:text-6xl font-sancreek text-(--color-text-primary) mt-4">Visítanos</h2>
+          <p class="text-(--color-text-muted) mt-6 text-lg max-w-md italic">
+            Estamos ubicados en el corazón de Santa Clara, listos para ofrecerte el mejor servicio de la zona.
+          </p>
+        </div>
 
-    <div>
-        <LinkButton href={site.cta.link}>
-            Agendar por WhatsApp
-        </LinkButton>
+        <div class="bg-(--color-bg-surface)/10 border border-(--color-accent)/20 p-8 rounded-sm">
+          <h4 class="font-sancreek text-(--color-accent) text-2xl mb-6">Horarios de Atención</h4>
+          <ul class="space-y-4">
+            {contactInfo.schedule.map((item) => (
+              <li class="flex justify-between border-b border-white/5 pb-2">
+                <span class="text-(--color-text-primary) text-sm uppercase tracking-widest">{item.days}</span>
+                <span class="text-(--color-text-muted) font-mono text-sm">{item.hours}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-6">
+          <a href={`https://wa.me/${contactInfo.whatsapp.replace(/\s+/g, '')}`} class="flex items-center gap-3 group">
+            <div class="size-12 rounded-full border border-(--color-accent) flex items-center justify-center group-hover:bg-(--color-accent) transition-all">
+              <svg class="size-6 text-(--color-accent) group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div>
+              <span class="block text-[10px] uppercase tracking-widest text-(--color-text-muted)">Reserva vía WhatsApp</span>
+              <span class="text-(--color-text-primary) font-bold">{contactInfo.whatsapp}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative h-125 w-full group">
+        <div class="absolute -inset-4 border border-(--color-bg-surface) opacity-30 pointer-events-none"></div>
+        
+        <div class="h-full w-full grayscale contrast-125 invert brightness-90 transition-all duration-700 group-hover:grayscale-0 group-hover:invert-0 group-hover:brightness-100 overflow-hidden rounded-sm">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3759.54!2d-99.06!3d19.54!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDMyJzM1LjgiTiA5OcKwMDMnNDQuNCJX!5e0!3m2!1ses!2smx!4v123456789" 
+            class="w-full h-full border-0" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <div class="absolute -bottom-6 left-6 right-6 bg-(--color-bg-primary) border-l-4 border-(--color-accent) p-6 shadow-2xl">
+          <p class="text-(--color-text-primary) font-bold uppercase tracking-widest text-xs">Dirección</p>
+          <p class="text-(--color-text-muted) text-sm mt-1">{contactInfo.address}, {contactInfo.city}</p>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>

@@ -1,35 +1,90 @@
 ---
 import Card from "@components/ui/Card.astro";
-import { site } from "@data/site";
+import Image from "astro/components/Image.astro";
+
+const services = [
+  {
+    title: "Corte Clásico",
+    description: "Técnica tradicional con tijera y máquina para un acabado impecable.",
+    price: "$150 MXN",
+    time: "45 min",
+    image: "/images/servicio-1.webp"
+  },
+  {
+    title: "Ritual de Barba",
+    description: "Afeitado a navaja, toallas calientes y bálsamos hidratantes de cedro.",
+    price: "$250 MXN",
+    time: "30 min",
+    image: "/images/servicio-2.webp"
+  },
+  {
+    title: "El Pack Maestro",
+    description: "Nuestro servicio insignia: Corte de autor + Ritual de barba completo.",
+    price: "$450 MXN",
+    time: "75 min",
+    image: "/images/service-3.jpg"
+  }
+];
 ---
 
-<section id="servicios" class="py-16 md:py-20 text-center px-6">
-  <div class="max-w-3xl mx-auto text-center mb-16">
-    <h2 class="text-3xl md:text-4xl font-semibold capitalize tracking-tight">
-      servicios
-    </h2>
-    <p style="color: var(--text-muted)" class="mt-4 text-lg">
-      Todo lo que necesitas para verte bien, hecho con precisión.
-    </p>
-  </div>
+<section id="cortes-barba" class="py-24 bg-(--color-bg-primary)">
+  <div class="container mx-auto px-6">
+    
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      <div class="max-w-2xl">
+        <span class="text-(--color-accent) uppercase tracking-[0.3em] text-sm font-bold">Servicios Artesanales</span>
+        <h2 class="text-5xl md:text-6xl font-sancreek text-(--color-text-primary) mt-4">Cortes & Barba</h2>
+      </div>
+      <p class="text-(--color-text-muted) max-w-sm italic border-l border-(--color-accent) pl-4">
+        Cada servicio incluye una consulta de estilo y el uso de productos premium seleccionados.
+      </p>
+    </div>
 
-  <!-- grid -->
-  <div class="grid md:grid-cols-3" data-stagger>
-    {
-      site.services.map(({ title, description, price }) => (
+    <div class="grid md:grid-cols-3 gap-8">
+      {services.map(service => (
         <Card>
-          <div class="card-hover h-full flex flex-col">
-            <h3 class="text-lg font-medium">{title}</h3>
+          
+          <div class="aspect-16/10 overflow-hidden">
+            <Image
+              width={100}
+              height={100} 
+              src={service.image} 
+              alt={service.title} 
+              class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-linear-to-t from-(--color-bg-primary) to-transparent opacity-80"></div>
+          </div>
 
-            <p
-              class="mt-3 text-sm leading-relaxed"
-              style="color: var(--text-muted);"
-            >
-              {description}
+          <div class="p-8 relative">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl font-sancreek text-(--color-text-primary)">{service.title}</h3>
+              <span class="text-(--color-accent) font-bold text-xl">{service.price}</span>
+            </div>
+            
+            <p class="text-(--color-text-muted) text-sm leading-relaxed mb-6">
+              {service.description}
             </p>
+
+            <div class="flex items-center justify-between pt-6 border-t border-white/10">
+              <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-(--color-text-muted)">
+                <svg class="size-4 text-(--color-accent)" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {service.time}
+              </div>
+              <button class="text-(--color-text-primary) text-[10px] uppercase tracking-[0.2em] font-bold group-hover:text-(--color-accent) transition-colors">
+                Reservar +
+              </button>
+            </div>
           </div>
         </Card>
-      ))
-    }
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <a href="/servicios" class="inline-block border-b border-(--color-accent) pb-1 text-(--color-text-primary) uppercase tracking-widest text-xs hover:text-(--color-accent) transition-colors">
+        Ver lista completa de servicios y precios
+      </a>
+    </div>
   </div>
 </section>

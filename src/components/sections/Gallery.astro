@@ -1,0 +1,131 @@
+---
+const galleryItems = [
+  {
+    style: "Low Fade",
+    tag: "Clásico",
+    image: "/images/gallery-1.webp",
+    alt: "Corte de cabello degradado bajo con terminación impecable",
+  },
+  {
+    style: "Pompadour",
+    tag: "Elegante",
+    image: "/images/gallery-2.webp",
+    alt: "Peinado Pompadour con volumen y fijación premium",
+  },
+  {
+    style: "Beard Trim",
+    tag: "Ritual",
+    image: "/images/gallery-3.webp",
+    alt: "Perfilado de barba con técnica de navaja abierta",
+  },
+  {
+    style: "Slick Back",
+    tag: "Vintage",
+    image: "/images/gallery-4.webp",
+    alt: "Peinado hacia atrás estilo clásico años 50",
+  },
+  {
+    style: "Buzz Cut",
+    tag: "Moderno",
+    image: "/images/gallery-5.webp",
+    alt: "Corte militar moderno con diseño en los laterales",
+  },
+  {
+    style: "Mullet Modern",
+    tag: "Tendencia",
+    image: "/images/gallery-6.webp",
+    alt: "Corte Mullet contemporáneo con textura",
+  },
+];
+---
+
+<section
+  id="galeria"
+  class="py-20 bg-(--color-bg-primary)"
+  aria-labelledby="gallery-title"
+>
+  <div class="container mx-auto px-6">
+    <div
+      class="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-white/10 pb-8 gap-6 text-center md:text-left"
+    >
+      <div>
+        <h2
+          id="gallery-title"
+          class="text-4xl md:text-5xl font-sancreek text-(--color-text-primary)"
+        >
+          Galería de Estilos
+        </h2>
+        <p
+          class="text-(--color-text-muted) mt-2 uppercase tracking-[0.2em] text-xs"
+        >
+          Nuestras últimas creaciones en el sillón
+        </p>
+      </div>
+
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-3 bg-(--color-bg-surface)/30 px-6 py-3 border border-(--color-accent)/30 rounded-sm hover:bg-(--color-accent) transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--color-accent)"
+      >
+        <span
+          class="text-xs uppercase tracking-widest font-bold text-(--color-text-primary)"
+          >@maestrosdelfilo</span
+        >
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        galleryItems.map((item) => (
+          <figure
+            class="group relative aspect-square overflow-hidden bg-(--color-bg-surface) cursor-pointer"
+            tabindex="0"
+          >
+            <img
+              src={item.image}
+              alt={item.alt}
+              loading="lazy"
+              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-focus-visible:scale-110 group-hover:brightness-40 group-focus-visible:brightness-40"
+            />
+
+            <figcaption class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 p-6 text-center">
+              <span class="text-(--color-accent) text-[10px] uppercase tracking-[0.3em] font-bold mb-2">
+                #{item.tag}
+              </span>
+              <h3 class="text-white font-sancreek text-2xl leading-tight">
+                {item.style}
+              </h3>
+              <div class="w-8 h-px bg-(--color-accent) mt-4" />
+
+              <span class="sr-only">Ver detalles del estilo {item.style}</span>
+            </figcaption>
+
+            <div class="absolute inset-4 border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-95 group-hover:scale-100 pointer-events-none" />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Soporte para navegación por teclado */
+  figure:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: -3px;
+  }
+
+  /* En dispositivos táctiles, el overlay puede activarse al tocar */
+  @media (hover: none) {
+    figcaption {
+      opacity: 0.9 !important;
+      background: linear-gradient(to top, rgba(1, 13, 17, 0.8), transparent);
+      justify-content: flex-end;
+      padding-bottom: 1.5rem;
+    }
+    figure img {
+      brightness: 0.8;
+    }
+  }
+</style>
