@@ -1,102 +1,23 @@
-:root {
-  --motion-fast: 150ms;
-  --motion-normal: 300ms;
-  --motion-slow: 500ms;
-}
-
-.fade-in {
-  animation: fade var(--motion-normal) ease-out both;
-}
-
-@keyframes fade {
+@keyframes revealUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes pulse-soft {
-  0% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 0 12px rgba(99, 102, 241, 0);
-  }
+.reveal {
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.pulse-accent {
-  animation: pulse-soft 2.5s ease-out infinite;
+/* Efecto Hover para botones o servicios */
+.hover-gold {
+  transition: all 0.3s ease;
 }
-
-
-[data-stagger] > * {
-  animation: fade var(--motion-normal) ease-out both;
-}
-
-[data-stagger] > *:nth-child(1) {
-  animation-delay: 0ms;
-}
-
-[data-stagger] > *:nth-child(2) {
-  animation-delay: 80ms;
-}
-
-[data-stagger] > *:nth-child(3) {
-  animation-delay: 160ms;
-}
-
-[data-stagger] > *:nth-child(4) {
-  animation-delay: 240ms;
-}
-
-.card-hover {
-  transition: transform var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px #00000014;
-}
-
-.button-hover {
-  transition: transform var(--motion-fast) ease, opacity var(--motion-fast) ease;
-}
-
-.button-hover:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
-}
-
-
-.link-underline {
-  position: relative;
-  text-decoration: underline;
-}
-
-.link-underline {
-  position: relative;
-  text-decoration: none;
-}
-
-.link-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--motion-fast) ease;
-}
-
-.link-underline:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.hover-gold:hover {
+  color: var(--accent);
+  letter-spacing: 1px;
 }

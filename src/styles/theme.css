@@ -1,0 +1,38 @@
+@theme {
+  /* Fonts */
+  --font-sancreek: "Sancreek", system-ui;
+  --font-montserrat: "Montserrat Variable", sans-serif;
+
+  /* Colors: Luxury Palette */
+  --color-gold-50: #fffcf2;
+  --color-gold-100: #f5f0e1;
+  --color-gold-400: #c5a059; /* Dorado base */
+  --color-gold-500: #b38b45; /* Dorado medio */
+  --color-gold-600: #946f33; /* Dorado oscuro/bronce */
+
+  --color-black-pure: #000000;
+  --color-black-rich: #0a0a0a; /* Negro con profundidad */
+  --color-black-soft: #1a1a1a;
+
+  --color-white-pure: #ffffff;
+  --color-white-soft: #f4f4f4;
+
+  /* Semantic Tokens */
+  --color-accent: var(--color-gold-500);
+  --color-accent-hover: var(--color-gold-400);
+
+  --color-bg-main: var(--color-black-rich);
+  --color-bg-card: var(--color-black-soft);
+
+  --color-text-main: var(--color-white-soft);
+  --color-text-muted: #a1a1aa;
+
+  /* Spacing & Borders */
+  --radius-luxury: 2px; /* Bordes menos redondeados = más elegante/serio */
+  --border-gold: 1px solid var(--color-gold-600);
+}
+
+:root {
+  /* Variables para el contenedor principal */
+  --container-width: 1200px;
+}
